@@ -11,6 +11,9 @@
 
 #include <util/delay.h>
 
+// Usage: uint8_t temperature = DHT11_readData(TEMP);
+//        uint8_t humidity = DHT11_readData(HUMIDITY);
+
 uint8_t DHT11_readData(bool datatype)
 {
     const uint8_t RAW_PIN = 1 << DHTPIN;
