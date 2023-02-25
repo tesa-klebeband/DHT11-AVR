@@ -25,9 +25,9 @@ uint8_t DHT11_readData(bool datatype)
     _delay_us(40);                              // Max time to respond
     DHTDDR &= ~RAW_PIN;                         // Set pin to input
     DHTPORT |= RAW_PIN;            
-    if (DHTIN & (1 << DHTPIN)) return -1;       // Line should be low
+    if (DHTIN & RAW_PIN) return -1;             // Line should be low
     _delay_us(80);                              // Time before DHT pulls line high
-    if (!(DHTIN & (1 << DHTPIN))) return -1;    // Line should be high
+    if (!(DHTIN & RAW_PIN)) return -1;          // Line should be high
     _delay_us(80);                              // Time before DHT starts with data transmission
 
     uint8_t data[5] = {0};
@@ -36,7 +36,7 @@ uint8_t DHT11_readData(bool datatype)
         uint8_t byte_data = 0;
         for (int i = 0; i < 8; i++) {           // Read every bit and store in one byte
             uint8_t timer = 0;
-            while(!(DHTIN & (1 << DHTPIN))) {   // Wait for line to be pulled high
+            while(!(DHTIN & RAW_PIN)) {         // Wait for line to be pulled high
                 _delay_us(1);
                 if (timer > 100) {              // Timeout if not pulled low in 100us
                     return -1;
@@ -48,7 +48,7 @@ uint8_t DHT11_readData(bool datatype)
                 byte_data |= (1 << 7 - i);
             }
             timer = 0;
-            while(DHTIN & (1 << DHTPIN)) {      // Wait for line to be pulled low 
+            while(DHTIN & RAW_PIN) {            // Wait for line to be pulled low 
                 _delay_us(1);
                 if (timer > 100) {              // Timeout
                     return -1;
