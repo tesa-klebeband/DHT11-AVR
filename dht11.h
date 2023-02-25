@@ -17,6 +17,7 @@
 uint8_t DHT11_readData(bool datatype)
 {
     const uint8_t RAW_PIN = 1 << DHTPIN;
+    DHTDDR |= RAW_PIN;
 
     // Read Start
     DHTPORT &= ~RAW_PIN;                        // Pull low for 18ms
