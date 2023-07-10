@@ -7,3 +7,5 @@ Connect your DHT11 to your AVR:
 * pin 4 to ground ( If there is no pin 4, connect pin 3 to ground )
 
 After this, include the header and match DHTDDR, DHTPORT, DHTIN and DHTPIN to yours. To read data from the DHT11, call the read function as shown in the header file.
+## License
+All files within this repo are released under the GNU GPL V3 License as per the LICENSE file stored in the root of this repo.
